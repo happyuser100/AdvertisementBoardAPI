@@ -50,7 +50,7 @@ namespace api.Repository
             foreach (var item in jarray)
             {
                 AdvertisementItem? ad = item.ToObject<AdvertisementItem>();
-                if (ad != null && ad.Place.Contains(place))
+                if (ad != null && ad.place.Contains(place))
                         items.Add(ad);
             }
             return items;
@@ -68,7 +68,7 @@ namespace api.Repository
             foreach (var item in jarray)
             {
                 AdvertisementItem? ad = item.ToObject<AdvertisementItem>();
-                if (ad != null && ad.Id == id)
+                if (ad != null && ad.id == id)
                     return ad;
             }
             return null;
@@ -79,8 +79,8 @@ namespace api.Repository
         {
             List<AdvertisementItem> items = await GetAllAsync();
             string newGuid = System.Guid.NewGuid().ToString();
-            advertisementItem.Id = newGuid;
-            advertisementItem.PostDate = DateTime.Now;
+            advertisementItem.id = newGuid;
+            advertisementItem.postDate = DateTime.Now;
             items.Add(advertisementItem);
 
             WriteItems(items);
@@ -122,7 +122,7 @@ namespace api.Repository
                 AdvertisementItem? ad = item.ToObject<AdvertisementItem>();
                 if (ad != null)
                 {
-                    if (ad.Id != id)
+                    if (ad.id != id)
                         items.Add(ad);
                     else
                         advertisementItem = ad;
@@ -140,16 +140,16 @@ namespace api.Repository
                 return null;
             }
 
-            existingItem.Place = advertisementItem.Place;
-            existingItem.AdProperty = advertisementItem.AdProperty;
-            existingItem.Title = advertisementItem.Title;
-            existingItem.ImageURL = advertisementItem.ImageURL;
-            existingItem.Description = advertisementItem.Description;
-            existingItem.IconUrl = advertisementItem.IconUrl;
-            existingItem.PersonName = advertisementItem.PersonName;
-            existingItem.PostDate = advertisementItem.PostDate;
-            existingItem.CommentsNumber = advertisementItem.CommentsNumber;
-            existingItem.IsWriteComments = advertisementItem.IsWriteComments;
+            existingItem.place = advertisementItem.place;
+            existingItem.adProperty = advertisementItem.adProperty;
+            existingItem.title = advertisementItem.title;
+            existingItem.imageURL = advertisementItem.imageURL;
+            existingItem.description = advertisementItem.description;
+            existingItem.iconUrl = advertisementItem.iconUrl;
+            existingItem.personName = advertisementItem.personName;
+            existingItem.postDate = advertisementItem.postDate;
+            existingItem.commentsNumber = advertisementItem.commentsNumber;
+            existingItem.isWriteComments = advertisementItem.isWriteComments;
 
             return existingItem;
         }
