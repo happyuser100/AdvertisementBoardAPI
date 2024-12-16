@@ -132,5 +132,26 @@ namespace api.Repository
             return advertisementItem;
         }
 
+        public async Task<AdvertisementItem?> UpdateAsync(string id, AdvertisementItem advertisementItem)
+        {
+            AdvertisementItem? existingItem = await GetByIdAsync(id);
+            if (existingItem == null)
+            {
+                return null;
+            }
+
+            existingItem.Place = advertisementItem.Place;
+            existingItem.AdProperty = advertisementItem.AdProperty;
+            existingItem.Title = advertisementItem.Title;
+            existingItem.ImageURL = advertisementItem.ImageURL;
+            existingItem.Description = advertisementItem.Description;
+            existingItem.IconUrl = advertisementItem.IconUrl;
+            existingItem.PersonName = advertisementItem.PersonName;
+            existingItem.PostDate = advertisementItem.PostDate;
+            existingItem.CommentsNumber = advertisementItem.CommentsNumber;
+            existingItem.IsWriteComments = advertisementItem.IsWriteComments;
+
+            return existingItem;
+        }
     }
 }

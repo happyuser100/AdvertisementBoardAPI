@@ -80,13 +80,13 @@ namespace api.Controllers
             try
             {
                 if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+                    return BadRequest(ModelState);
 
                 var ad = await _advertisementBoardRepository.DeleteAsync(id);
 
                 if (ad == null)
                 {
-                   return NotFound("Advertisment does not exist");
+                    return NotFound("Advertisment does not exist");
                 }
 
                 return Ok(ad);
@@ -94,6 +94,30 @@ namespace api.Controllers
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Delete:Internal server error: {ex}");
+            }
+        }
+
+        [HttpPut]
+        [Route("update/{id}")]
+        public async Task<IActionResult> Update([FromRoute] string id, [FromBody] AdvertisementItem advertisementItem)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                var ad = await _advertisementBoardRepository.UpdateAsync(id, advertisementItem);
+
+                if (ad == null)
+                {
+                    return NotFound("Advertisment does not exist");
+                }
+
+                return Ok(ad);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Update:Internal server error: {ex}");
             }
         }
     }
