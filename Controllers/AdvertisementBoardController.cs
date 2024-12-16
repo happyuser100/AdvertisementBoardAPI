@@ -57,7 +57,6 @@ namespace api.Controllers
 
 
         [HttpPost]
-        [Route("create")]
         public async Task<IActionResult> Create([FromBody] AdvertisementItem advertisementItem)
         {
             try
