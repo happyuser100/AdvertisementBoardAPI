@@ -2,7 +2,7 @@
 {
     public class AdvertisementItem
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string Place { get; set; } = string.Empty;
         public string AdProperty { get; set; } = string.Empty;
         public string Title { get; set; } = string.Empty;
