@@ -37,5 +37,18 @@
     "postDate": "2024-12-16T21:08:02.9797312+02:00",
     "commentsNumber": 0,
     "isWriteComments": true
+  },
+  {
+    "id": "25cd23d5-8983-40b2-b431-c2d1b95980cc",
+    "place": "Tel Aviv",
+    "adProperty": "Rent",
+    "title": "דירה ליד שוק הכרמל",
+    "imageURL": "",
+    "description": "דירה 2 חדרים חלומית בבנין אקלקטי\nלשימו החל מ-29.8",
+    "iconUrl": "icon2.gif",
+    "personName": "Chen Naor",
+    "postDate": "2024-12-17T11:00:21.0610138+02:00",
+    "commentsNumber": 0,
+    "isWriteComments": true
   }
 ]

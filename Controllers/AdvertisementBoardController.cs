@@ -46,7 +46,12 @@ namespace api.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                var ads = await _advertisementBoardRepository.GetByPlaceAsync(place);
+                List<AdvertisementItem> ads = new();
+                if (!string.IsNullOrEmpty(place))
+                     ads = await _advertisementBoardRepository.GetByPlaceAsync(place);
+                else
+                    ads = await _advertisementBoardRepository.GetAllAsync();
+
                 return Ok(JsonConvert.SerializeObject(ads));
             }
             catch (Exception ex)
@@ -54,6 +59,39 @@ namespace api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"getByPlace:Internal server error: {ex}");
             }
         }
+
+        [HttpGet]
+        [Route("getByPropAndPlace/{place}/{prop}")]
+        public async Task<IActionResult> GetByPropAndPlace(string place, string prop)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                List<AdvertisementItem> ads = new();
+                if (!string.IsNullOrEmpty(place))
+                {
+                    if (!string.IsNullOrEmpty(prop))
+                        ads = await _advertisementBoardRepository.GetByPlacePropAsync(place,prop);
+                    else 
+                        ads = await _advertisementBoardRepository.GetByPlaceAsync(place);
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(prop))
+                        ads = await _advertisementBoardRepository.GetByOnlyProp(prop);
+                    else  
+                        ads = await _advertisementBoardRepository.GetAllAsync();
+                }
+                return Ok(JsonConvert.SerializeObject(ads));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"GetByPropAndPlace:Internal server error: {ex}");
+            }
+        }
+
 
 
         [HttpPost]

@@ -56,6 +56,42 @@ namespace api.Repository
             return items;
         }
 
+        public async Task<List<AdvertisementItem>> GetByPlacePropAsync(string place, string prop)
+        {
+            var fullPath = GetFullPath();
+
+            using StreamReader reader = new(fullPath);
+            var json = await reader.ReadToEndAsync();
+
+            var jarray = JArray.Parse(json);
+            List<AdvertisementItem> items = new();
+            foreach (var item in jarray)
+            {
+                AdvertisementItem? ad = item.ToObject<AdvertisementItem>();
+                if (ad != null && ad.place.Contains(place) && ad.adProperty.Contains(prop))
+                    items.Add(ad);
+            }
+            return items;
+        }
+
+        public async Task<List<AdvertisementItem>> GetByOnlyProp(string prop)
+        {
+            var fullPath = GetFullPath();
+
+            using StreamReader reader = new(fullPath);
+            var json = await reader.ReadToEndAsync();
+
+            var jarray = JArray.Parse(json);
+            List<AdvertisementItem> items = new();
+            foreach (var item in jarray)
+            {
+                AdvertisementItem? ad = item.ToObject<AdvertisementItem>();
+                if (ad != null && ad.adProperty.Contains(prop))
+                    items.Add(ad);
+            }
+            return items;
+        }
+
         public async Task<AdvertisementItem?> GetByIdAsync(string id)
         {
             var fullPath = GetFullPath();
