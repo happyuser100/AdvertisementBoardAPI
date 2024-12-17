@@ -64,22 +64,23 @@ namespace api.Controllers
         [Route("getByPropAndPlace/{place}/{prop}")]
         public async Task<IActionResult> GetByPropAndPlace(string place, string prop)
         {
+            string ALL = "all";
             try
             {
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
                 List<AdvertisementItem> ads = new();
-                if (!string.IsNullOrEmpty(place))
+                if (place != ALL)
                 {
-                    if (!string.IsNullOrEmpty(prop))
+                    if (prop != ALL)  
                         ads = await _advertisementBoardRepository.GetByPlacePropAsync(place,prop);
                     else 
                         ads = await _advertisementBoardRepository.GetByPlaceAsync(place);
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(prop))
+                    if (prop != ALL)
                         ads = await _advertisementBoardRepository.GetByOnlyProp(prop);
                     else  
                         ads = await _advertisementBoardRepository.GetAllAsync();
