@@ -145,8 +145,7 @@ namespace api.Repository
         public async Task<AdvertisementItem?> DeleteAsync(string id)
         {
             AdvertisementItem? advertisementItem = null;
-            var rootPath = _hostingEnvironment.ContentRootPath; //get the root path
-            var fullPath = Path.Combine(rootPath, "Data/ad.json");
+            var fullPath = GetFullPath();
 
             using StreamReader reader = new(fullPath);
             var json = await reader.ReadToEndAsync();
