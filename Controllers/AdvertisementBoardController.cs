@@ -112,6 +112,26 @@ namespace api.Controllers
             }
         }
 
+
+        [HttpGet]
+        [Route("getById/{id}")]
+        public async Task<IActionResult> GetById(string id)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                var ads = await _advertisementBoardRepository.GetByIdAsync(id);
+
+                return Ok(JsonConvert.SerializeObject(ads));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"getById:Internal server error: {ex}");
+            }
+        }
+
         [HttpDelete]
         [Route("delete/{id}")]
         public async Task<IActionResult> Delete([FromRoute] string id)

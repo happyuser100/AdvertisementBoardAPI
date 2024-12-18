@@ -9,6 +9,7 @@ namespace api.Interfaces
         Task<List<AdvertisementItem>> GetByPlaceAsync(string place);
         Task<List<AdvertisementItem>> GetByPlacePropAsync(string place, string prop);
         Task<List<AdvertisementItem>> GetByOnlyProp(string prop);
+        Task<AdvertisementItem?> GetByIdAsync(string id);
         Task<AdvertisementItem?> DeleteAsync(string id);
         Task<AdvertisementItem?> UpdateAsync(string id, AdvertisementItem advertisementItem);
     }
