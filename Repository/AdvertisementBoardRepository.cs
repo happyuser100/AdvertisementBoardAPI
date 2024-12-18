@@ -163,6 +163,10 @@ namespace api.Repository
                         advertisementItem = ad;
                 }
             }
+
+            reader.Close();
+            Thread.Sleep(2000);
+
             WriteItems(items);
             return advertisementItem;
         }
